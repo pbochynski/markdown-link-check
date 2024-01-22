@@ -18,7 +18,7 @@ class Input {
     }
 }
 
-function commaSeparatedCodesList(value, dummyPrevious) {
+function commaSeparatedCodesList(value) {
     return value.split(',').map(function(item) {
         return parseInt(item, 10);
     });
@@ -59,22 +59,10 @@ function getInputs() {
         .arguments('[filenamesOrUrls...]')
         .action(function (filenamesOrUrls) {
             let filenameForOutput;
-            let stream;
 
             if (!filenamesOrUrls.length) {
                 // read from stdin unless a filename is given
                 inputs.push(new Input(filenameForOutput, process.stdin, {}));
-            }
-
-            function onError(error) {
-                console.error(chalk.red('\nERROR: Unable to connect! Please provide a valid URL as an argument.'));
-                process.exit(1);
-            }
-            function onResponse(response) {
-                if (response.statusCode === 404) {
-                    console.error(chalk.red('\nERROR: 404 - File not found! Please provide a valid URL as an argument.'));
-                    process.exit(1);
-                }
             }
 
             for (const filenameOrUrl of filenamesOrUrls) {
@@ -101,7 +89,7 @@ function getInputs() {
                         for (let file of files) {
                             filenameForOutput = file;
                             baseUrl = 'file://' + path.dirname(path.resolve(file));
-                            inputs.push(new Input(filenameForOutput, stream, {baseUrl: baseUrl}));
+                            inputs.push(new Input(filenameForOutput, null, {baseUrl: baseUrl}));
                         }
                     } else {
                         baseUrl = 'file://' + path.dirname(path.resolve(filenameOrUrl));
@@ -137,7 +125,7 @@ function getInputs() {
 }
 
 async function loadConfig(config) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         fs.access(config, (fs.constants || fs).R_OK, function (err) {
             if (!err) {
                 let configStream = fs.createReadStream(config);

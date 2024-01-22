@@ -104,7 +104,6 @@ describe('markdown-link-check', function () {
                 "retryCount": MAX_RETRY_COUNT,
                 "fallbackRetryDelay": "500ms"
             }, function (err, results) {
-            console.log(results)
             expect(err).to.be(null);
             expect(results).to.be.an('array');
 
@@ -161,22 +160,12 @@ describe('markdown-link-check', function () {
                 { statusCode: 200, status: 'alive' },
 
             ];
-            console.log(expected)
             expect(results.length).to.be(expected.length);
-            console.log(results.length, expected.length)
 
             for (let i = 0; i < results.length; i++) {
-                console.log(results[i].statusCode, results[i].status , expected[i].statusCode, expected[i].status)
-                if (results[i].statusCode !== expected[i].statusCode) {
-                    console.error('error:',results[i].statusCode, expected[i].statusCode)
-                }
-                if (results[i].status !== expected[i].status) {
-                    console.error('error:',results[i].status, expected[i].status)
-                }
                 expect(results[i].statusCode).to.be(expected[i].statusCode);
                 expect(results[i].status).to.be(expected[i].status);
             }
-            console.log('done')
 
             done();
         });

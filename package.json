@@ -3,7 +3,7 @@
   "version": "3.12.3",
   "description": "checks the all of the hyperlinks in a markdown text to determine if they are alive or dead",
   "bin": {
-    "md-check-link": "md-check-link"
+    "md-check-link": "md-check-link.js"
   },
   "main": "index.js",
   "scripts": {

@@ -1,8 +1,11 @@
+# md-check-link
+
 This is fork of [markdown-link-check](https://github.com/tcort/markdown-link-check) with added support for checking links to [docsify aliases](https://docsify.js.org/#/configuration?id=alias).
+
 The changes are submitted to the upstream repository: https://github.com/tcort/markdown-link-check/pull/289
+
 Until my contribution is merged, I will maintain this fork.
 
-# markdown-link-check
 
 Extracts links from markdown texts and checks whether each link is
 alive (`200 OK`) or dead. `mailto:` links are validated with

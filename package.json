@@ -1,9 +1,9 @@
 {
-  "name": "markdown-link-check",
+  "name": "md-check-link",
   "version": "3.11.2",
   "description": "checks the all of the hyperlinks in a markdown text to determine if they are alive or dead",
   "bin": {
-    "markdown-link-check": "markdown-link-check"
+    "md-check-link": "md-check-link"
   },
   "main": "index.js",
   "scripts": {

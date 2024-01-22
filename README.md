@@ -1,4 +1,6 @@
-![Test library workflow status](https://github.com/tcort/markdown-link-check/workflows/Test%20library/badge.svg)
+This is fork of [markdown-link-check](https://github.com/tcort/markdown-link-check) with added support for checking links to [docsify aliases](https://docsify.js.org/#/configuration?id=alias).
+The changes are submitted to the upstream repository: https://github.com/tcort/markdown-link-check/pull/289
+Until my contribution is merged, I will maintain this fork.
 
 # markdown-link-check
 
@@ -11,48 +13,14 @@ alive (`200 OK`) or dead. `mailto:` links are validated with
 To add the module to your project, run:
 
 ```shell
-npm install --save-dev markdown-link-check
+npm install --save-dev md-check-link
 ```
 
 To install the command line tool globally, run:
 
 ```shell
-npm install -g markdown-link-check
+npm install -g md-check-link
 ```
-
----
-
-## Run using Docker
-
-Docker images are built with each release. Use the `stable` tag for the current stable release.
-
-Add current directory with your `README.md` file as read only volume to `docker run`:
-
-```shell
-docker run -v ${PWD}:/tmp:ro --rm -i ghcr.io/tcort/markdown-link-check:stable /tmp/README.md
-```
-
-Alternatively, if you wish to target a specific release, images are tagged with semantic versions (i.e. `3`, `3.8`, `3.8.3`)
-
-## Run in a GitHub action
-
-Please head on to [github-action-markdown-link-check](https://github.com/gaurav-nelson/github-action-markdown-link-check).
-
-## Run as a pre-commit hook
-
-To run as a [pre-commit hook](https://pre-commit.com):
-
-```
-- repo: https://github.com/tcort/markdown-link-check
-  rev: ...
-  hooks:
-    - id: markdown-link-check
-      args: [-q]
-```
-
-## Run in other tools
-
-- [Mega-Linter](https://megalinter.io/latest/): Linters aggregator [including markdown-link-check](https://megalinter.io/latest/descriptors/markdown_markdown_link_check/)
 
 ## API
 
@@ -105,7 +73,7 @@ You can write html comments to disable markdown-link-check for parts of the text
 ```js
 'use strict';
 
-var markdownLinkCheck = require('markdown-link-check');
+var markdownLinkCheck = require('md-check-link');
 
 markdownLinkCheck('[example](http://example.com)', function (err, results) {
     if (err) {
@@ -123,7 +91,7 @@ markdownLinkCheck('[example](http://example.com)', function (err, results) {
 ```js
 'use strict';
 
-var markdownLinkCheck = require('markdown-link-check');
+var markdownLinkCheck = require('md-check-link');
 
 markdownLinkCheck('[example](http://example.com)', { httpHeaders: [{ urls: ['http://example.com'], headers: { 'Authorization': 'Basic Zm9vOmJhcg==' }}] }, function (err, results) {
     if (err) {
@@ -144,28 +112,29 @@ If not supplied, the tool reads from standard input.
 #### Check links from a markdown file hosted on the web
 
 ```shell
-markdown-link-check https://github.com/tcort/markdown-link-check/blob/master/README.md
+md-check-link https://github.com/tcort/markdown-link-check/blob/master/README.md
 ```
 
 #### Check links from a local markdown file
 
 ```shell
-markdown-link-check ./README.md
+md-check-link ./README.md
 ```
 
 #### Check links from a local markdown folder (recursive)
 
 ```shell
-markdown-link-check ./docs
+md-check-link ./docs
 ```
 
 #### Usage
 
 ```shell
-Usage: markdown-link-check [options] [filenameOrUrl]
+Usage: md-check-link [options] [filenameOrUrl]
 
 Options:
   -p, --progress         show progress bar
+  -n, --parallel <n>     number of parallel requests (default: 2)
   -c, --config [config]  apply a config file (JSON), holding e.g. url specific header configuration
   -q, --quiet            displays errors only
   -v, --verbose          displays detailed error information

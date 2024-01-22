@@ -4,7 +4,7 @@
 
 let chalk;
 const fs = require('fs');
-const markdownLinkCheck = require('./');
+const markdownLinkCheck = require('.');
 const path = require('path');
 const pkg = require('./package.json');
 const program = require('commander');

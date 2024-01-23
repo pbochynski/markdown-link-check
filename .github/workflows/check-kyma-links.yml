@@ -1,0 +1,29 @@
+name: Verify markdown links in Kyma project
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  verify-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # checkout kyma with git clone https://github.com/kyma-project/kyma.git
+      - name: Chechout Kyma
+        uses: actions/checkout@v2
+        with:
+          repository: kyma-project/kyma
+          path: kyma
+      #install nodejs 20.x
+      - name: Install md-check-link
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install md-check-link
+        run: npm install -g md-check-link
+      - name: Verify links
+        run: |
+          md-check-link -n 8 -c .mlc.config.json ./kyma
+        
+        

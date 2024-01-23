@@ -5,7 +5,20 @@ on:
   schedule:
     - cron: '0 0 * * *'
 jobs:
-  install-md-check-link:
+  verify-links:
+    strategy:
+      matrix:
+        repository:
+          - kyma
+          - btp-manager
+          - istio
+          - serverless-manager
+          - telemetry-manager
+          - eventing-manager
+          - api-gateway
+          - nats-manager
+          - application-connector-manager
+          - keda-manager  
     runs-on: ubuntu-latest
     steps:
       - name: Install md-check-link
@@ -14,17 +27,7 @@ jobs:
           node-version: '20.x'
       - name: Install md-check-link
         run: npm install -g md-check-link
-  verify-links:
-    strategy:
-      matrix:
-        repository:
-          - kyma
-          - btp-manager
-          - istio
-    runs-on: ubuntu-latest
-    needs: install-md-check-link
-    steps:
-      - name: Checkout Kyma
+      - name: Checkout ${{matrix.repository}}
         uses: actions/checkout@v2
         with:
           repository: kyma-project/${{matrix.repository}}

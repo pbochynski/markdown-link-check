@@ -14,12 +14,12 @@ jobs:
           - btp-manager
           - istio
           - serverless-manager
-          # - telemetry-manager
-          # - eventing-manager
-          # - api-gateway
-          # - nats-manager
-          # - application-connector-manager
-          # - keda-manager  
+          - telemetry-manager
+          - eventing-manager
+          - api-gateway
+          - nats-manager
+          - application-connector-manager
+          - keda-manager  
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

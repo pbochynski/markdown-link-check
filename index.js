@@ -73,6 +73,7 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
     opts.anchors = anchors;
     let parallel = opts.parallel || 2
     async.mapLimit(linksCollection, parallel, function (link, callback) {
+        
         if (opts.ignorePatterns) {
             const shouldIgnore = opts.ignorePatterns.some(function(ignorePattern) {
                 return ignorePattern.pattern instanceof RegExp ? ignorePattern.pattern.test(link) : (new RegExp(ignorePattern.pattern)).test(link) ? true : false;
@@ -85,6 +86,39 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                 return;
             }
         }
+        if (opts.aliases) {
+            for (let alias of Object.keys(opts.aliases.alias)) {
+                let regex = new RegExp(opts.aliases.basePath+alias);
+                if (regex.test(link)) {
+                    console.log('Replacing '+link+' with '+opts.aliases.alias[alias]);
+                    link = link.replace(regex, opts.aliases.alias[alias]);   
+                    console.log('Replaced link: '+link);                 
+                    let pathParts = link.split('/');
+                    let lastPathItem = pathParts[pathParts.length-1];
+
+                    let parts = lastPathItem.split('?id=');
+                    let filename = parts[0];
+                    if (filename.indexOf('.')<0) {
+                        filename+='.md'
+                    }
+                    console.log('filename: '+filename); 
+                    let newLink = '';
+                    for (let i=0; i<pathParts.length-1; i++) {
+                        newLink += pathParts[i]+'/';
+                    }
+                    newLink += filename;
+                    if (parts.length>1) {
+                        newLink += '#'+parts[1];
+                    }
+                    link = newLink;
+                    console.log('new link: '+link);
+                }
+                let regex2 = new RegExp('^'+alias);
+                if (regex2.test(link)) {
+                    link = link.replace(regex2, opts.aliases.alias[alias]);
+                }
+            }
+        }
 
         if (opts.replacementPatterns) {
             for (let replacementPattern of opts.replacementPatterns) {
@@ -93,18 +127,6 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
             }
         }
 
-        if (opts.aliases) {
-            for (let alias of Object.keys(opts.aliases.alias)) {
-                let regex = new RegExp(opts.aliases.basePath+alias);
-                if (regex.test(link)) {
-                    link = link.replace(regex, opts.aliases.alias[alias]);
-                    let filename = link.split('/').pop();
-                    if (filename.indexOf('.')<0) {
-                        link += '.md'
-                    }
-                }
-            }
-        }
 
 
         // Make sure it is not undefined and that the appropriate headers are always recalculated for a given link.

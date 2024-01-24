@@ -12,15 +12,15 @@
     "aliases": {
       "basePath": "https://kyma-project.io/#",
       "alias": {
-        "/btp-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/btp-manager/main/docs/$1",
-        "/application-connector-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/application-connector-manager/main/docs/$1",
-        "/keda-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/keda-manager/main/docs/$1",
-        "/serverless-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/serverless/main/docs/$1",
-        "/telemetry-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/telemetry-manager/main/docs/$1",
-        "/istio/(.*)": "https://raw.githubusercontent.com/kyma-project/istio/main/docs/$1",
-        "/nats-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/nats-manager/main/docs/$1",
-        "/eventing-manager/(.*)": "https://raw.githubusercontent.com/kyma-project/eventing-manager/main/docs/$1",
-        "/api-gateway/(.*)": "https://raw.githubusercontent.com/kyma-project/api-gateway/main/docs/$1"
+        "/btp-manager/": "https://raw.githubusercontent.com/kyma-project/btp-manager/main/docs/",
+        "/application-connector-manager/": "https://raw.githubusercontent.com/kyma-project/application-connector-manager/main/docs/",
+        "/keda-manager/": "https://raw.githubusercontent.com/kyma-project/keda-manager/main/docs/",
+        "/serverless-manager/": "https://raw.githubusercontent.com/kyma-project/serverless/main/docs/",
+        "/telemetry-manager/": "https://raw.githubusercontent.com/kyma-project/telemetry-manager/main/docs/",
+        "/istio/": "https://raw.githubusercontent.com/kyma-project/istio/main/docs/",
+        "/nats-manager/": "https://raw.githubusercontent.com/kyma-project/nats-manager/main/docs/",
+        "/eventing-manager/": "https://raw.githubusercontent.com/kyma-project/eventing-manager/main/docs/",
+        "/api-gateway/": "https://raw.githubusercontent.com/kyma-project/api-gateway/main/docs/"
       }   
     },
     "aliveStatusCodes": [200]

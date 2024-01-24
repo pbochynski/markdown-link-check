@@ -172,6 +172,7 @@ async function processInput(filenameForOutput, stream, opts) {
         opts.fallbackRetryDelay = config.fallbackRetryDelay;
         opts.aliveStatusCodes = config.aliveStatusCodes;
         opts.parallel = opts.parallel || config.parallel;
+        opts.aliases = config.aliases;
     }
 
     await runMarkdownLinkCheck(filenameForOutput, markdown, opts);

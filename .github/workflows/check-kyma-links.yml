@@ -9,10 +9,10 @@ jobs:
     strategy:
       matrix:
         repository:
-          # - kyma
+          - kyma
           - btp-manager
           - istio
-          # - serverless-manager
+          - serverless-manager
           # - telemetry-manager
           # - eventing-manager
           # - api-gateway
@@ -26,8 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-      - name: Install md-check-link
-        run: npm install -g md-check-link
+      - name: Install 
+        run: npm install
       - name: Checkout ${{matrix.repository}}
         uses: actions/checkout@v2
         with:
@@ -35,5 +35,6 @@ jobs:
           path: ${{matrix.repository}}
       - name: Verify links
         run: |
-          md-check-link -q -n 8 -c .mlc.config.json ./${{matrix.repository}}
+          cd ${{matrix.repository}}
+          node ../md-check-link.js -q -n 8 -c ../.mlc.config.json ./docs
         

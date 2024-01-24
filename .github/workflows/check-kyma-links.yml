@@ -7,6 +7,7 @@ on:
 jobs:
   verify-links:
     strategy:
+      fail-fast: false
       matrix:
         repository:
           - kyma

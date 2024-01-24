@@ -90,9 +90,7 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
             for (let alias of Object.keys(opts.aliases.alias)) {
                 let regex = new RegExp(opts.aliases.basePath+alias);
                 if (regex.test(link)) {
-                    console.log('Replacing '+link+' with '+opts.aliases.alias[alias]);
                     link = link.replace(regex, opts.aliases.alias[alias]);   
-                    console.log('Replaced link: '+link);                 
                     let pathParts = link.split('/');
                     let lastPathItem = pathParts[pathParts.length-1];
 
@@ -101,7 +99,6 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                     if (filename.indexOf('.')<0) {
                         filename+='.md'
                     }
-                    console.log('filename: '+filename); 
                     let newLink = '';
                     for (let i=0; i<pathParts.length-1; i++) {
                         newLink += pathParts[i]+'/';
@@ -111,7 +108,6 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                         newLink += '#'+parts[1];
                     }
                     link = newLink;
-                    console.log('new link: '+link);
                 }
                 let regex2 = new RegExp('^'+alias);
                 if (regex2.test(link)) {

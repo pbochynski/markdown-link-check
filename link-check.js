@@ -102,7 +102,7 @@ module.exports = function linkCheck(link, opts, callback) {
     url = link.startsWith('#') ? link : new URL(link, opts.baseUrl);
 
   } catch (err) {
-    console.log(link, opts.baseUrl, err);
+    callback(new Error('Wrong link'), null);
     return;
   }
   const protocol = link.startsWith('#') ? 'hash' : url.protocol.replace(/:$/, '');

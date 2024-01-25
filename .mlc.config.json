@@ -11,6 +11,7 @@
     "fallbackRetryDelay": "30s",
     "aliases": {
       "basePath": "https://kyma-project.io/#",
+      "basePathAlias": "https://raw.githubusercontent.com/kyma-project/kyma/main/docs/",
       "alias": {
         "/btp-manager/": "https://raw.githubusercontent.com/kyma-project/btp-manager/main/docs/",
         "/application-connector-manager/": "https://raw.githubusercontent.com/kyma-project/application-connector-manager/main/docs/",

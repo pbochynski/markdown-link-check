@@ -86,12 +86,10 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                 return;
             }
         }
-        console.log('link:', link);
         if (opts.aliases) {
             for (let alias of Object.keys(opts.aliases.alias)) {                
                 let regex = new RegExp(opts.aliases.basePath+alias);
                 if (regex.test(link)) {
-                    console.log('regex:', regex);   
                     link = link.replace(regex, opts.aliases.alias[alias]);   
                     let pathParts = link.split('/');
                     let lastPathItem = pathParts[pathParts.length-1];
@@ -109,7 +107,6 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                     if (parts.length>1) {
                         newLink += '#'+parts[1];
                     }
-                    console.log('link:', link, '\nnewLink:', newLink);
                     link = newLink;
                 }
                 let regex2 = new RegExp('^'+alias);

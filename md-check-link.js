@@ -222,9 +222,9 @@ async function runMarkdownLinkCheck(filenameForOutput, markdown, opts) {
             if (results.some((result) => result.status === 'dead')) {
                 let deadLinks = results.filter(result => { return result.status === 'dead'; });
                 if(!opts.quiet){
-                    console.error(chalk.red('\n  ERROR: %s dead links found!'), deadLinks.length);
+                    console.log(chalk.red('\n  ERROR: %s dead links found!'), deadLinks.length);
                 } else {
-                    console.error(chalk.red('\n  ERROR: %s dead links found in %s !'), deadLinks.length, filenameForOutput);
+                    console.log(chalk.red('\n  ERROR: %s dead links found in %s !'), deadLinks.length, filenameForOutput);
                 }
                 deadLinks.forEach(function (result) {
                     console.log('  [%s] %s → Status: %s', statusLabels[result.status], result.link, result.statusCode);

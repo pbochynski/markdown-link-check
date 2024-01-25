@@ -89,7 +89,7 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
         if (opts.aliases) {
             let replacements = []
             for (let alias of Object.keys(opts.aliases.alias)){
-                replacements.push({regex:new RegExp(opts.aliases.basePath+alias), regex2: new RegExp('^alias'), 
+                replacements.push({regex:new RegExp(opts.aliases.basePath+alias), regex2: new RegExp('^'+alias), 
                 replacement:opts.aliases.alias[alias]})
             }
             replacements.push({regex:new RegExp(opts.aliases.basePath), replacement:opts.aliases.basePathAlias})

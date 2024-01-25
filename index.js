@@ -87,10 +87,16 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
             }
         }
         if (opts.aliases) {
-            for (let alias of Object.keys(opts.aliases.alias)) {                
-                let regex = new RegExp(opts.aliases.basePath+alias);
+            let replacements = []
+            for (let alias of Object.keys(opts.aliases.alias)){
+                replacements.push({regex:new RegExp(opts.aliases.basePath+alias), regex2: new RegExp('^alias'), 
+                replacement:opts.aliases.alias[alias]})
+            }
+            replacements.push({regex:new RegExp(opts.aliases.basePath), replacement:opts.aliases.basePathAlias})
+            for (let replacement of replacements) {                
+                let regex = replacement.regex;
                 if (regex.test(link)) {
-                    link = link.replace(regex, opts.aliases.alias[alias]);   
+                    link = link.replace(regex, replacement.replacement);   
                     let pathParts = link.split('/');
                     let lastPathItem = pathParts[pathParts.length-1];
 
@@ -109,13 +115,11 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
                     }
                     link = newLink;
                 }
-                let regex2 = new RegExp('^'+alias);
-                if (regex2.test(link)) {
-                    link = link.replace(regex2, opts.aliases.alias[alias]);
+                let regex2 = replacement.regex2;
+                if (regex2 && regex2.test(link)) {
+                    link = link.replace(regex2, replacement.replacement);
                 }
             }
-            let regex = new RegExp(opts.aliases.basePath);
-            link = link.replace(regex, opts.aliases.basePathAlias);
         }
 
         if (opts.replacementPatterns) {

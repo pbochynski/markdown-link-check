@@ -102,7 +102,9 @@ module.exports = function markdownLinkCheck(markdown, opts, callback) {
 
                     let parts = lastPathItem.split('?id=');
                     let filename = parts[0];
-                    if (filename.indexOf('.')<0) {
+                    if (link.endsWith('/')) {
+                        filename='README.md'
+                    } else if (filename.indexOf('.')<0) {
                         filename+='.md'
                     }
                     let newLink = '';
